@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    header.intro-header(style="background-color: #fff;")
+      // Main Content
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+         a(class='btn btn-default btn-primary' href='/manage/categories/add') Create Category
+         h1= title
+          small
+           a(href='/manage/articles') Manage Articles
+         != messages()  
+         table(class='table table-striped')
+          tr
+           th Category Title
+           th
+          each category, i in categories  
+           tr
+            td 
+             h3 #{category.title}
+             h5 #{category.description}
+            td
+             a(class="btn btn-tiny btn-default" href="/manage/categories/edit/#{category._id}") Edit
+             a(class='btn btn-danger category-delete pull-right', data-category-id=category._id.toString(), data-csrf=locals._csrf) Delete

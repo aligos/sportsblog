@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    header.intro-header(style="background-color: #fff;")
+      // Main Content
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+         a(class='btn btn-default btn-primary' href='/manage/articles/add') Create Article
+         h1= title
+          small
+           a(href='/manage/categories') Manage Categories
+         table(class='table table-striped')
+          tr
+           th Article Title
+           th Date Published
+           th Author
+           th
+          each article, i in articles
+           tr
+            td #{article.title}
+            td #{moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+            td #{article.author}
+            td
+             a(class="btn btn-tiny btn-default" href="/manage/articles/edit/#{article.id}")
+              span(class="glyphicon glyphicon-pencil" aria-hidden="true")
+             a(class='btn btn-danger article-delete pull-right', data-article-id=article._id.toString(), data-csrf=locals._csrf)
+              span(class="glyphicon glyphicon-trash" aria-hidden="true")
